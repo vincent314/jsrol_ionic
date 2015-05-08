@@ -1,5 +1,12 @@
-angular.module('starter.controllers', [])
-    .controller('EventsCtrl', function ($scope) {
+angular.module('jsrol.controllers', ['jsrol.services'])
+    .controller('EventsCtrl', function ($scope,Events) {
+        Events.query({
+            fromDate: moment().format()
+        })
+            .$promise
+            .then(function (events) {
+                $scope.events = events
+            });
     })
 
     .controller('ChatsCtrl', function ($scope, Chats) {
