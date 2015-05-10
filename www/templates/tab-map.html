@@ -1,7 +1,7 @@
 <ion-view view-title="{{ title }}">
-  <ion-content class="padding">
+  <ion-content data-tap-disabled="true">
   {{ loop }}
 
-  <leaflet defaults="defaults" center="center" width="100%" height="400px"></leaflet>
+  <leaflet defaults="map.defaults" center="map.center"></leaflet>
   </ion-content>
 </ion-view>
