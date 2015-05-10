@@ -1,4 +1,4 @@
-angular.module('jsrol', ['ionic', 'jsrol.controllers', 'jsrol.services'])
+angular.module('jsrol', ['ionic', 'jsrol.controllers', 'jsrol.services', 'leaflet-directive'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -41,12 +41,37 @@ angular.module('jsrol', ['ionic', 'jsrol.controllers', 'jsrol.services'])
                 }
             })
 
+            .state('tab.details', {
+                url: '/details',
+                params: {event: null},
+                views: {
+                    'tab-events': {
+                        templateUrl: 'templates/tab-event-details.html',
+                        controller: 'EventDetailsCtrl'
+                    }
+                }
+            })
+
             .state('tab.tracks', {
                 url: '/tracks',
                 views: {
                     'tab-tracks': {
                         templateUrl: 'templates/tab-tracks.html',
-                        controller: 'ChatsCtrl'
+                        controller: 'TracksCtrl'
+                    }
+                }
+            })
+
+            .state('tab.map', {
+                url: '/map/:loop',
+                params: {
+                    'loop': null,
+                    'title': null
+                },
+                views: {
+                    'tab-events': {
+                        templateUrl: 'templates/tab-map.html',
+                        controller: 'MapCtrl'
                     }
                 }
             });

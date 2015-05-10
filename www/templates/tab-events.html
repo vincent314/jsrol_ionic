@@ -1,18 +1,10 @@
-<ion-view view-title="Randos">
+<ion-view view-title="Randonnées">
   <ion-content class="padding">
     <div class="list">
-        <a class="item item-thumbnail-right" ng-repeat="event in events">
-          <button class="button button-positive" ng-show="event.loop1">
-            1
-          </button>
-          <button class="button button-positive" ng-show="event.loop2">
-            2
-          </button>
-          <button class="button button-positive" ng-show="event.loop3">
-            3
-          </button>
+        <a href="#" ng-click="eventClick(event)" class="item item-icon-right" ng-repeat="event in events">
           <h2>{{event.dateTime | date}}</h2>
           <p>{{ event.name }}</p>
+          <i class="icon ion-chevron-right"></i>
         </a>
       </div>
     </div>

@@ -1,5 +1,5 @@
 angular.module('jsrol.controllers', ['jsrol.services'])
-    .controller('EventsCtrl', function ($scope,Events) {
+    .controller('EventsCtrl', function ($scope, Events, $state) {
         Events.query({
             fromDate: moment().format()
         })
@@ -7,21 +7,35 @@ angular.module('jsrol.controllers', ['jsrol.services'])
             .then(function (events) {
                 $scope.events = events
             });
-    })
 
-    .controller('ChatsCtrl', function ($scope, Chats) {
-        $scope.chats = Chats.all();
-        $scope.remove = function (chat) {
-            Chats.remove(chat);
+        $scope.eventClick = function (event) {
+            $state.go('tab.details', {event: event});
         }
     })
 
-    .controller('ChatDetailCtrl', function ($scope, $stateParams, Chats) {
-        $scope.chat = Chats.get($stateParams.chatId);
+    .controller('EventDetailsCtrl', function ($scope, $stateParams, $state) {
+        $scope.event = $stateParams.event;
+        $scope.loopClick = function (l,title) {
+            console.log(l);
+            $state.go('tab.map', {
+                loop: l,
+                title: title
+            });
+        };
     })
 
-    .controller('AccountCtrl', function ($scope) {
-        $scope.settings = {
-            enableFriends: true
-        };
+    .controller('TracksCtrl', function ($scope) {
+    })
+
+    .controller('MapCtrl', function ($scope, $stateParams, leafletData,config) {
+        var loop =  $stateParams.loop;
+        $scope.title = $stateParams.title;
+
+        leafletData.getMap().then(function(map){
+            var kmlLayer = omnivore.kml(config.jsrolRestBaseUrl + "/api/tracks/" + loop +"/kml").addTo(map);
+            kmlLayer.on('ready', function () {
+                map.fitBounds(kmlLayer.getBounds());
+            });
+        });
     });
+

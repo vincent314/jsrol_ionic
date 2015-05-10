@@ -1,0 +1,12 @@
+<ion-view view-title="{{ event.name }}">
+  <ion-content class="padding">
+        <h2>{{ event.dateTime | date}}</h2>
+        <h3>{{ event.name }}</h3>
+      <div>
+      <button class="button button-stable" ng-show="event.loop1" ng-click="loopClick(event.loop1,'boucle 1')">boucle 1</button>
+      <button class="button button-stable" ng-show="event.loop2" ng-click="loopClick(event.loop2,'boucle 2')">boucle 2</button>
+      <button class="button button-stable" ng-show="event.loop3" ng-click="loopClick(event.loop3,'boucle 3')">boucle 3</button>
+      <p>{{ event.description }}</p>
+      </div>
+  </ion-content>
+</ion-view>
